@@ -1,8 +1,42 @@
+# 🤖 Bot Discord - Sauvegarde & Restauration de Serveur
+
+Bot Discord permettant de sauvegarder et restaurer la configuration complète de vos serveurs Discord (rôles, channels, permissions, etc.).
+
+## ⚠️ IMPORTANT - Usage Légal
+
+**Ce bot doit être utilisé UNIQUEMENT sur :**
+- Vos propres serveurs Discord
+- Des serveurs où vous avez reçu l'autorisation explicite du propriétaire
+
+L'utilisation de ce bot pour cloner des serveurs sans autorisation viole les conditions d'utilisation de Discord et peut entraîner un bannissement.
+
+## 🌟 Fonctionnalités
+
+- ✅ Sauvegarde complète des rôles (permissions, couleurs, positions)
+- ✅ Sauvegarde des catégories avec leurs permissions
+- ✅ Sauvegarde de tous les channels (texte et vocal)
+- ✅ Sauvegarde des permissions spécifiques à chaque channel
+- ✅ Restauration automatisée sur un nouveau serveur
+- ✅ Fichiers de sauvegarde au format JSON lisible
+- ✅ Protection par permissions administrateur
+
+## 📋 Prérequis
+
+- Python 3.8 ou supérieur
+- Un compte Discord Developer avec un bot créé
+- Permissions administrateur sur les serveurs où vous utiliserez le bot
+
 ## 🚀 Installation
 
 ### 1. Cloner ou télécharger les fichiers
 
-Assurez-vous d'avoir tous les fichiers dans le même dossier.
+Assurez-vous d'avoir tous les fichiers dans le même dossier :
+- `discord_backup_bot.py` - Le bot principal
+- `requirements.txt` - Les dépendances
+- `.env.example` - Exemple de configuration
+- `encode_token.py` - Script pour encoder votre token en Base64
+- `.gitignore` - Protection des fichiers sensibles
+- `README.md` - Cette documentation
 
 ### 2. Installer les dépendances
 
@@ -23,17 +57,35 @@ pip install -r requirements.txt
    - ✅ MESSAGE CONTENT INTENT
 7. Copiez le token du bot
 
-### 4. Configurer le token
+### 4. Configurer le token (ENCODÉ EN BASE64)
 
-Ouvrez le fichier `discord_backup_bot.py` et remplacez `'VOTRE_TOKEN_ICI'` à la dernière ligne par votre token de bot.
+Le bot utilise un token encodé en Base64 pour plus de sécurité.
 
-**OU** créez un fichier `.env` :
+**Méthode 1 : Utiliser le script automatique (recommandé)**
 
+```bash
+python encode_token.py
+```
+
+Le script vous demandera votre token Discord, l'encodera en Base64, et créera automatiquement le fichier `.env`.
+
+**Méthode 2 : Encoder manuellement**
+
+1. Encodez votre token en Base64 :
+   - En Python : `python -c "import base64; print(base64.b64encode(b'VOTRE_TOKEN').decode())"`
+   - En ligne : utilisez un encodeur Base64 en ligne
+
+2. Créez un fichier `.env` :
 ```bash
 cp .env.example .env
 ```
 
-Puis éditez `.env` et ajoutez votre token.
+3. Éditez `.env` et ajoutez votre token encodé :
+```
+DISCORD_TOKEN_B64=dm90cmVfdG9rZW5fZW5jb2Rl
+```
+
+⚠️ **Important** : N'oubliez pas d'ajouter `.env` à votre `.gitignore` (déjà fait si vous utilisez le fichier fourni) !
 
 ### 5. Inviter le bot sur votre serveur
 
@@ -129,9 +181,12 @@ Pour éviter le rate limiting de Discord, le bot attend 0.5 seconde entre chaque
 ## 🛡️ Sécurité
 
 - **Ne partagez JAMAIS votre token de bot** - C'est comme un mot de passe
-- Ajoutez `.env` à votre `.gitignore` si vous utilisez Git
+- Le token est encodé en Base64 dans le fichier `.env` pour éviter qu'il soit visible en clair
+- Ajoutez `.env` à votre `.gitignore` (déjà inclus dans le fichier fourni)
 - Ne donnez les permissions administrateur qu'aux personnes de confiance
 - Vérifiez toujours le contenu d'une sauvegarde avec `!info` avant de la restaurer
+
+**Note sur Base64** : L'encodage Base64 n'est PAS un chiffrement, c'est simplement de l'obscurcissement. Il empêche simplement que le token soit visible directement dans les fichiers. Pour une vraie sécurité, ne partagez jamais votre fichier `.env` et gardez vos tokens secrets.
 
 ## 🐛 Résolution des problèmes
 

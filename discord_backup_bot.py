@@ -3,6 +3,9 @@ from discord.ext import commands
 import json
 import asyncio
 from datetime import datetime
+import base64
+import os
+from dotenv import load_dotenv
 
 # Configuration du bot
 intents = discord.Intents.default()
@@ -333,7 +336,40 @@ async def help_command(ctx):
     
     await ctx.send(embed=embed)
 
+# Charger les variables d'environnement
+load_dotenv()
+
+# Fonction pour décoder le token depuis Base64
+def decode_token():
+    """Décode le token Discord depuis Base64"""
+    encoded_token = os.getenv('DISCORD_TOKEN_B64')
+    
+    if not encoded_token:
+        # Fallback : chercher un token non encodé (pour compatibilité)
+        plain_token = os.getenv('DISCORD_TOKEN')
+        if plain_token:
+            print("⚠️ Attention : Utilisez DISCORD_TOKEN_B64 avec un token encodé en Base64")
+            return plain_token
+        else:
+            raise ValueError("❌ Token Discord non trouvé dans .env")
+    
+    try:
+        # Décoder depuis Base64
+        decoded_bytes = base64.b64decode(encoded_token)
+        return decoded_bytes.decode('utf-8')
+    except Exception as e:
+        raise ValueError(f"❌ Erreur lors du décodage du token : {e}")
+
 # Remplacez 'VOTRE_TOKEN_ICI' par votre token de bot Discord
+# OU utilisez le fichier .env avec votre token encodé en Base64
 if __name__ == "__main__":
-    TOKEN = 'MTQ2ODU1MTIxMzUwNjIzNjQ4Mg.GGftsB.J-_qqzrjdmo5g8o0IQhq08av88R3bqiQXXBXi0'
-    bot.run(TOKEN)
+    try:
+        TOKEN = decode_token()
+        bot.run(TOKEN)
+    except ValueError as e:
+        print(e)
+        print("\n📝 Instructions :")
+        print("1. Créez un fichier .env")
+        print("2. Encodez votre token en Base64")
+        print("3. Ajoutez : DISCORD_TOKEN_B64=votre_token_encodé")
+        print("\nPour encoder votre token, utilisez : python encode_token.py")
