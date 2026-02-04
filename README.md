@@ -1,31 +1,3 @@
-# 🤖 Bot Discord - Sauvegarde & Restauration de Serveur
-
-Bot Discord permettant de sauvegarder et restaurer la configuration complète de vos serveurs Discord (rôles, channels, permissions, etc.).
-
-## ⚠️ IMPORTANT - Usage Légal
-
-**Ce bot doit être utilisé UNIQUEMENT sur :**
-- Vos propres serveurs Discord
-- Des serveurs où vous avez reçu l'autorisation explicite du propriétaire
-
-L'utilisation de ce bot pour cloner des serveurs sans autorisation viole les conditions d'utilisation de Discord et peut entraîner un bannissement.
-
-## 🌟 Fonctionnalités
-
-- ✅ Sauvegarde complète des rôles (permissions, couleurs, positions)
-- ✅ Sauvegarde des catégories avec leurs permissions
-- ✅ Sauvegarde de tous les channels (texte et vocal)
-- ✅ Sauvegarde des permissions spécifiques à chaque channel
-- ✅ Restauration automatisée sur un nouveau serveur
-- ✅ Fichiers de sauvegarde au format JSON lisible
-- ✅ Protection par permissions administrateur
-
-## 📋 Prérequis
-
-- Python 3.8 ou supérieur
-- Un compte Discord Developer avec un bot créé
-- Permissions administrateur sur les serveurs où vous utiliserez le bot
-
 ## 🚀 Installation
 
 ### 1. Cloner ou télécharger les fichiers
